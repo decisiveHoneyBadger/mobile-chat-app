@@ -8,60 +8,79 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // Create the navigator
 const Stack = createStackNavigator();
+
 export default class HelloWorld extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: 'Hello Test' };
+    this.state = {
+      name: '',
+      color: '',
+    };
   }
-  alertMyText(input = []) {
-    Alert.alert(input.text);
+
+  setColor(color) {
+    this.setState({
+      ...this.state,
+      color,
+    });
+  }
+
+  setName(name) {
+    this.setState(
+      {
+        ...this.state,
+        name,
+      },
+      () => {
+        console.log('### this.state: ', this.state);
+      },
+    );
+  }
+
+  getMainColor() {
+    if (this.state.color === '#000000' || this.state.color === '#484058') {
+      return '#ffffff';
+    }
+
+    return '#000000';
   }
 
   render() {
     return (
       <NavigationContainer>
-        <View style={styles.container}>
-          {/* <View style={styles.box1}></View>
-        <View style={styles.box2}></View>
-        <View style={styles.box3}></View> */}
-
-          {/* <View style={{ flex: 1, justifyContent: 'center' }}>
-            <TextInput
-              style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-              onChangeText={(text) => this.setState({ text })}
-              value={this.state.text}
-              placeholder="Type here ..."
-            ></TextInput>
-            <Button
-              onPress={() => {
-                this.alertMyText({ text: this.state.text });
-              }}
-              title="Press Me"
-            />
-            <Text>You wrote: {this.state.text}</Text>
-          </View> */}
-          <Start></Start>
-        </View>
+        <Stack.Navigator initialRouteName="Start">
+          <Stack.Screen name="Start">
+            {(props) => (
+              <Start
+                {...props}
+                color={this.state.color}
+                setColor={this.setColor.bind(this)}
+                name={this.state.name}
+                setName={this.setName.bind(this)}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen
+            name="Chat"
+            options={{
+              title: this.state.name,
+              headerStyle: {
+                backgroundColor: this.state.color,
+              },
+              headerTintColor: this.getMainColor(),
+            }}
+          >
+            {(props) => (
+              <Chat
+                {...props}
+                color={this.state.color}
+                name={this.state.name}
+                mainColor={this.getMainColor()}
+              />
+            )}
+          </Stack.Screen>
+        </Stack.Navigator>
       </NavigationContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  box1: {
-    flex: 10,
-    backgroundColor: 'blue',
-  },
-  box2: {
-    flex: 120,
-    backgroundColor: 'red',
-  },
-  box3: {
-    flex: 50,
-    backgroundColor: 'green',
-  },
-});
