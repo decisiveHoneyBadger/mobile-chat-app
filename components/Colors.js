@@ -8,11 +8,13 @@ import {
   ImageBackground,
 } from 'react-native';
 
+// optional background colors for the user in Start.js
 const color1 = '#000000';
 const color2 = '#484058';
 const color3 = '#8795a7';
 const color4 = '#b6c7ac';
 
+// it provides the color pallet for the login screen
 export default class Colors extends React.Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,7 @@ export default class Colors extends React.Component {
     this.props.setColor(color);
   }
 
+  // renders the optional colors in the start screen
   render() {
     return (
       <View>
@@ -57,27 +60,27 @@ export default class Colors extends React.Component {
   }
 }
 
+// style sheets for the elements - including the colors
 const styles = StyleSheet.create({
   colorsText: {
-    fontSize: '16',
-    fontWeight: '300',
-    fontColor: '#757083',
-    marginBottom: '1rem',
+    fontSize: 16,
+    color: '#484058',
+    marginBottom: 8,
   },
   colors: {
-    // display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    maxWidth: '300px',
+    marginBottom: 20,
   },
   color: {
-    height: '50px',
-    borderRadius: '50px',
-    width: '50px',
+    height: 50,
+    borderRadius: 50,
+    width: 50,
   },
   isActive: {
-    border: 'red 3px solid',
+    borderColor: '#ff0000',
+    borderWidth: 4,
   },
   color1: {
     backgroundColor: color1,

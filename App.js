@@ -6,9 +6,10 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-// Create the navigator
+// variable to switch the screens
 const Stack = createStackNavigator();
 
+// it incorporates all the necessarry components displayed in the app
 export default class HelloWorld extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +46,7 @@ export default class HelloWorld extends Component {
     return '#000000';
   }
 
+  // renders all the elements of the app that should be displayed
   render() {
     return (
       <NavigationContainer>

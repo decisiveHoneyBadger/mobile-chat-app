@@ -9,15 +9,17 @@ import {
   Image,
 } from 'react-native';
 import Colors from './Colors';
-
 import logo from '../assets/background.png';
 import icon from '../assets/icon.svg';
+
+// navigates the home screen
 export default class Start extends React.Component {
   constructor(props) {
     super(props);
     this.navigation = this.props.navigation;
   }
 
+  // renders the elements on the start screen like, login form, colors, and the button
   render() {
     return (
       <ImageBackground
@@ -29,7 +31,8 @@ export default class Start extends React.Component {
           <Text style={styles.title}>App Title</Text>
           <View style={styles.login}>
             <View style={styles.name}>
-              <Image style={styles.icon} source={icon} />
+              {/* <Image style={styles.icon} source={icon} /> */}
+
               <TextInput
                 style={styles.formInput}
                 onChangeText={(name) => this.props.setName(name)}
@@ -54,6 +57,7 @@ export default class Start extends React.Component {
   }
 }
 
+// style sheets for the elements - just below render()
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -65,46 +69,41 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 45,
-    fontWeight: 600,
     color: '#fff',
-    // margin: 'auto',
-    // marginTop: '20%',
+    marginTop: '20%',
+  },
+  textInputBorder: {
+    backgroundColor: '#efefef',
+    padding: 1,
+    width: '100%',
   },
   login: {
     width: '88%',
-    height: '44%',
     justifyContent: 'space-between',
     backgroundColor: '#fff',
-    // margin: '10%',
-    padding: '2rem',
+    margin: '10%',
+    padding: 16,
   },
   name: {
-    border: '2px solid #555',
-    padding: '0.75rem',
-    display: 'flex',
-    borderRadius: '4px',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 10,
+    marginBottom: 8,
   },
   icon: {
     height: 20,
     width: 20,
-    // display: 'inline-block',
-    // marginRight: 10,
+    marginRight: 10,
   },
   formInput: {
-    // display: 'inline-block',
-    fontSize: 16,
-    fontWeight: 300,
-    fontColor: '#757083',
-    opactity: 0.5,
-    lineHeight: 2,
-    // margin: '2rem 0',
+    width: '100%',
+    color: '#000',
   },
   startChatting: {
     fontSize: 16,
     fontWeight: 600,
-    color: 'red',
+    color: '#ffff00',
     backgroundColor: '#757083',
     alignItems: 'center',
     justifyContent: 'center',
@@ -115,9 +114,7 @@ const styles = StyleSheet.create({
   },
   startChattingText: {
     fontSize: 16,
-    lineHeight: 21,
     fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: 'white',
+    color: '#fff',
   },
 });
