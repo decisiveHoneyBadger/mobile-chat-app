@@ -17,6 +17,16 @@ export default class Start extends React.Component {
   constructor(props) {
     super(props);
     this.navigation = this.props.navigation;
+    this.state = {
+      name: '',
+      color: '',
+    };
+  }
+
+  setName(name) {
+    this.setState({
+      name: name,
+    });
   }
 
   // renders the elements on the start screen like, login form, colors, and the button
@@ -35,8 +45,8 @@ export default class Start extends React.Component {
 
               <TextInput
                 style={styles.formInput}
-                onChangeText={(name) => this.props.setName(name)}
-                value={this.props.name}
+                onChangeText={(name) => this.setName(name)}
+                value={this.state.name}
                 placeholder="Your name"
                 opacity={0.5}
               />
@@ -45,7 +55,7 @@ export default class Start extends React.Component {
             <Pressable
               style={styles.startChatting}
               onPress={() => {
-                this.navigation.navigate('Chat');
+                this.navigation.navigate('Chat', { name: this.state.name });
               }}
             >
               <Text style={styles.startChattingText}>Start Chatting</Text>
