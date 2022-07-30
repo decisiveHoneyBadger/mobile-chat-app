@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
 
 const styles = StyleSheet.create({
   container: {
