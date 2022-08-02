@@ -1,7 +1,16 @@
+import { identity } from 'lodash';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Platform,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
-import { Platform, KeyboardAvoidingView } from 'react-native';
+import firebase from 'firebase';
+import 'firebase/firestore';
 
 let styles = StyleSheet.create({
   container: {
@@ -14,6 +23,13 @@ export default class Chat extends React.Component {
     super(props);
     this.state = {
       messages: [],
+      uid: 0,
+      user: {
+        _id: '',
+        name: '',
+        avatar: '',
+      },
+      isConnected: null,
     };
 
     const firebaseConfig = {
@@ -26,11 +42,8 @@ export default class Chat extends React.Component {
       measurementId: 'G-ZZ1XW6F0P1',
     };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+    var app = firebase.initializeApp(firebaseConfig);
     this.referenceChatMessages = firebase.firestore().collection('messages');
-    // firebase.firestore().collection('messages');
   }
 
   onCollectionUpdate = (querySnapshot) => {
@@ -43,7 +56,13 @@ export default class Chat extends React.Component {
         _id: data._id,
         text: data.text,
         createdAt: data.createdAt.toDate(),
-        user: data.user,
+        user: {
+          _id: data.user._id,
+          name: data.user.name,
+          avatar: data.location || null,
+        },
+        image: data.image || null,
+        locastion: data.location || null,
       });
       this.setState({
         messages: messages,
@@ -52,6 +71,25 @@ export default class Chat extends React.Component {
   };
 
   componentDidMount() {
+    this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        firebase.auth().signInAnonymously();
+      }
+      this.setState({
+        uid: user.uid,
+        messages: [],
+      });
+      this.unsubscribe = this.referenceChatMessages
+        .orderBy('createdAt', 'desc')
+        .onSnapshot(this.onCollectionUpdate);
+    });
+
+    // create a reference to the active user's documents (shopping lists)
+    this.referenceMessagelistUser = firebase
+      .firestore()
+      .collection('messages')
+      .where('uid', '==', this.state.uid);
+
     this.referenceMessageLists = firebase.firestore().collection('messages');
     this.unsubscribe = this.referenceMessageLists.onSnapshot(
       this.onCollectionUpdate,
@@ -78,31 +116,39 @@ export default class Chat extends React.Component {
         },
       ],
     });
-
-    this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
-      if (!user) {
-        await firebase.auth().signInAnonymously();
-      }
-
-      //update user state with currently active user data
-      this.setState({
-        uid: user.uid,
-        loggedInText: 'Hello there',
-      });
-    });
   }
 
-  // sends the input messages
+  //stops listening to authentication and collection changes
+  componentWillUnmount() {
+    this.unsubscribe();
+    this.authUnsubscribe();
+  }
+
+  // sends the input messages (to the state)
   onSend(messages = []) {
-    // this.setState((previousState) => ({
-    //   messages: GiftedChat.append(previousState.messages, messages),
-    // }));
-
-    this.referenceMessageLists.add({
-      name: 'TestList',
-      items: ['eggs', 'pasta', 'veggies'],
-    });
+    this.setState(
+      (previousState) => ({
+        messages: GiftedChat.append(previousState.messages, messages),
+      }),
+      () => {
+        this.addMessages();
+      },
+    );
   }
+
+  //adds message to firetore
+  addMessages = () => {
+    const message = this.state.messages[0];
+    this.referenceChatMessages.add({
+      uid: this.state.uid,
+      _id: message._id,
+      text: message.text || '',
+      createdAt: message.createdAt,
+      user: message.user,
+      image: message.image || null,
+      location: message.location || null,
+    });
+  };
 
   // formats the bubble with css
   renderBubble(props) {
