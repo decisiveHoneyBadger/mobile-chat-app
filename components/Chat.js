@@ -4,7 +4,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   Platform,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -42,7 +41,10 @@ export default class Chat extends React.Component {
       measurementId: 'G-ZZ1XW6F0P1',
     };
 
-    var app = firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
     this.referenceChatMessages = firebase.firestore().collection('messages');
   }
 
@@ -74,14 +76,15 @@ export default class Chat extends React.Component {
     this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         firebase.auth().signInAnonymously();
+      } else {
+        this.setState({
+          uid: user.uid,
+          messages: [],
+        });
+        this.unsubscribe = this.referenceChatMessages
+          .orderBy('createdAt', 'desc')
+          .onSnapshot(this.onCollectionUpdate);
       }
-      this.setState({
-        uid: user.uid,
-        messages: [],
-      });
-      this.unsubscribe = this.referenceChatMessages
-        .orderBy('createdAt', 'desc')
-        .onSnapshot(this.onCollectionUpdate);
     });
 
     // create a reference to the active user's documents (shopping lists)
