@@ -27,6 +27,7 @@ export default class Start extends React.Component {
     this.setState({
       name: name,
     });
+    this.props.setName(name);
   }
 
   // renders the elements on the start screen like, login form, colors, and the button
