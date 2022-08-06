@@ -13,6 +13,7 @@ import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
+import CustomActions from './CustomActions';
 let styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -240,12 +241,17 @@ export default class Chat extends React.Component {
     );
   }
 
+  renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
   render() {
     return (
       <View style={[styles.container, { backgroundColor: this.props.color }]}>
         <GiftedChat
           renderBubble={this.renderBubble.bind(this)}
           messages={this.state.messages}
+          renderActions={this.renderCustomActions.bind(this)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           onSend={(messages) => this.onSend(messages)}
           user={{
