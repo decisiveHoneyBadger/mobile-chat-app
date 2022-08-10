@@ -241,9 +241,9 @@ export default class Chat extends React.Component {
     );
   }
 
-  renderCustomActions = (props) => {
+  renderCustomActions(props) {
     return <CustomActions {...props} />;
-  };
+  }
 
   render() {
     return (
