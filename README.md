@@ -11,50 +11,46 @@ It is a chat app for mobile devices using React Native. The app will provide use
 
 ## User Stories
 
-<p>
-● As a new user, I want to be able to easily enter a chat room so I can quickly start talking to my
-friends and family.
-● As a user, I want to be able to send messages to my friends and family members to exchange
-the latest news.
-● As a user, I want to send images to my friends to show them what I’m currently doing.
-● As a user, I want to share my location with my friends to show them where I am.
-● As a user, I want to be able to read my messages offline so I can reread conversations at any
-time.
-● As a user with a visual impairment, I want to use a chat app that is compatible with a screen
-reader so that I can engage with a chat interface.
-</p>
+    ● As a new user, I want to be able to easily enter a chat room so I can quickly start talking to my
+    friends and family.
+    ● As a user, I want to be able to send messages to my friends and family members to exchange
+    the latest news.
+    ● As a user, I want to send images to my friends to show them what I’m currently doing.
+    ● As a user, I want to share my location with my friends to show them where I am.
+    ● As a user, I want to be able to read my messages offline so I can reread conversations at any
+    time.
+    ● As a user with a visual impairment, I want to use a chat app that is compatible with a screen
+    reader so that I can engage with a chat interface.
 
 ## Key Features
 
-<p>
-● A page where users can enter their name and choose a background color for the chat screen
-before joining the chat.
-● A page displaying the conversation, as well as an input field and submit button.
-● The chat must provide users with two additional communication features: sending images
-and location data.
-● Data gets stored online and offline.
-</p>
+    ● A page where users can enter their name and choose a background color for the chat screen
+    before joining the chat.
+    ● A page displaying the conversation, as well as an input field and submit button.
+    ● The chat must provide users with two additional communication features: sending images
+    and location data.
+    ● Data gets stored online and offline.
 
 ## Technical Requirements
 
-● The app is written in React Native.
-● The app is developed using Expo.
-● The app is styled according to the given screen design.
-● Chat conversations are stored in Google Firestore Database.
-● The app authenticates users anonymously via Google Firebase authentication.
-● Chat conversations are stored locally.
-● The app lets users pick and send images from the phone’s image library.
-● The app lets users take pictures with the device’s camera app, and send them.
-● The app stores images in Firebase Cloud Storage.
-● The app is able to read the user’s location data.
+    ● The app is written in React Native.
+    ● The app is developed using Expo.
+    ● The app is styled according to the given screen design.
+    ● Chat conversations are stored in Google Firestore Database.
+    ● The app authenticates users anonymously via Google Firebase authentication.
+    ● Chat conversations are stored locally.
+    ● The app lets users pick and send images from the phone’s image library.
+    ● The app lets users take pictures with the device’s camera app, and send them.
+    ● The app stores images in Firebase Cloud Storage.
+    ● The app is able to read the user’s location data.
 
 ## Technologies
 
-● React Native
-● Expo
-● Android Studio
-● Firebase (Google Cloud)
-● Gifted Chat
+    ● React Native
+    ● Expo
+    ● Android Studio
+    ● Firebase (Google Cloud)
+    ● Gifted Chat
 
 ## Dependencies
 
@@ -64,19 +60,19 @@ see the [package.json](/package.json)
 
 ### Prerequisites
 
-<p>
 register and create a new project @ https://expo.dev/
+
 ```
 npm install expo-cli -g
 ```
-For Windows and Linux: Install [Android Studio](https://developer.android.com/studio).
+
+For Windows and Linux: Install
+[Android Studio](https://developer.android.com/studio).
 For more information how to set up an emulator, look [here](https://docs.expo.dev/workflow/android-studio-emulator/?redirected)
 
 For Mac: Install [XCode](https://developer.apple.com/xcode/)
 
 Install the <b>Expo app</b> on your mobile device (available in Google Play Store and Apple Store)
-
-</p>
 
 ### Install database
 
@@ -99,14 +95,14 @@ Create Google Firebase/Firestore account for data storage.
 
 ### Getting started
 
-● Install all the dependencies:
-`npm i`
+    ● Install all the dependencies:
+    `npm i`
 
-● Start the app by:
-`expo start` or `npm start`
+    ● Start the app by:
+    `expo start` or `npm start`
 
-● Launch app on smartphone:
-scan <b>QR code</b> or type in <b>respective abbreviations</b> (displayed in terminal) in Expo GUI
+    ● Launch app on smartphone:
+    scan <b>QR code</b> or type in <b>respective abbreviations</b> (displayed in terminal) in Expo GUI
 
-● Launch app on emulator:
-Press <b>"Run on Android device/emulator"</b> or <b>"Run on iOS emulator"</b> or <b>"run in web browser"</b> in Expo GUI
+    ● Launch app on emulator:
+    Press <b>"Run on Android device/emulator"</b> or <b>"Run on iOS emulator"</b> or <b>"run in web browser"</b> in Expo GUI
