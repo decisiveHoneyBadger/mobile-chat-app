@@ -6,8 +6,8 @@ It is a chat app for mobile devices using React Native. The app will provide use
 
 ## Images
 
-![app-screenshot-1](assets/background-image.png width=50% height=50%)
-![app-screenshot-2](assets/chat.png width=50% height=50%)
+<img src="assets/background-image.png" width="30%" height="30%">
+<img src="assets/chat.png" width="30%" height="30%">
 
 ## User Stories
 
