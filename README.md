@@ -1,11 +1,15 @@
-# <u>React Native Mobile Chat App</u>
+# React Native Mobile Chat App
 
-## <u>Images</u>
+## Description
 
-![] (assets/background-image.png)
-![] (assets/chat.png)
+It is a chat app for mobile devices using React Native. The app will provide users with a chat interface and options to share images and their location.
 
-## <u>User Stories</u>
+## Images
+
+![app-screenshot-1](assets/background-image.png)
+![app-screenshot-2](assets/chat.png)
+
+## User Stories
 
 <p>
 ● As a new user, I want to be able to easily enter a chat room so I can quickly start talking to my
@@ -20,7 +24,7 @@ time.
 reader so that I can engage with a chat interface.
 </p>
 
-## </u>Key Features</u>
+## Key Features
 
 <p>
 ● A page where users can enter their name and choose a background color for the chat screen
@@ -31,9 +35,20 @@ and location data.
 ● Data gets stored online and offline.
 </p>
 
-## </u>Libraries</u>
+## Technical Requirements
 
-## </u>Technologies</u>
+● The app is written in React Native.
+● The app is developed using Expo.
+● The app is styled according to the given screen design.
+● Chat conversations are stored in Google Firestore Database.
+● The app authenticates users anonymously via Google Firebase authentication.
+● Chat conversations are stored locally.
+● The app lets users pick and send images from the phone’s image library.
+● The app lets users take pictures with the device’s camera app, and send them.
+● The app stores images in Firebase Cloud Storage.
+● The app is able to read the user’s location data.
+
+## Technologies
 
 ● React Native
 ● Expo
@@ -41,36 +56,57 @@ and location data.
 ● Firebase (Google Cloud)
 ● Gifted Chat
 
-## </u>Dependencies</u>
+## Dependencies
 
-see the [package.json] (https://github.com/decisiveHoneyBadger/mobile-chat-app/blob/main/package.json)
+see the [package.json](/package.json)
 
-## </u>How to set up</u>
+## How to set up
 
 ### Prerequisites
 
 <p>
 register and create a new project @ https://expo.dev/
-
+```
 npm install expo-cli -g
+```
+For Windows and Linux: Install [Android Studio](https://developer.android.com/studio).
+For more information how to set up an emulator, look [here](https://docs.expo.dev/workflow/android-studio-emulator/?redirected)
 
-● For <b>Windows</b> and <b>Linux</b>:
-Install <b>[Android Studio]</b> (https://developer.android.com/studio). For more information how to set up an emulator, look [here] (https://docs.expo.dev/workflow/android-studio-emulator/?redirected)
-
-● For <b>Mac</b>:
-Install <b>[XCode]</b>(https://developer.apple.com/xcode/)
+For Mac: Install [XCode](https://developer.apple.com/xcode/)
 
 Install the <b>Expo app</b> on your mobile device (available in Google Play Store and Apple Store)
 
 </p>
 
-### </u>Getting started</u>
+### Install database
 
-● Install all the dependencies: <b>npm i <b>
+Create Google Firebase/Firestore account for data storage.
+[Firebase documentation](https://firebase.google.com/docs/web/setup)
 
-● Start the app by: <b>expo start</b> or <b>npm start</b>
+1. Sign into https://firebase.google.com/ to get started
 
-● Launch app on smartphone: scan <b>QR code</b> or type in <b>respective abbreviations</b> (displayed in terminal) in Expo GUI
+2. Click on "create a project" and follow the steps. Start in test mode then start a collection, ("Auto-ID" to generate a random Document ID).
+
+3. Install Firestore via Firebase: `npm install firebase`
+
+4. Create a new directory "config" and add a new file "firebase.js" to it.
+
+5. Back in the Firebase project in the browser, open up "Settings", then "General" tab. Under the section "Your apps", link Firebase to app by clicking the tag icon.
+
+6. After connecting, it will generate configurations for different platforms. Here, click "Firestore for Web" and then copy the contents of the config object info to config/firebaseConfig.dist.js file. Initialize the App by adding `import firebase from firebase` at the top of the file firebase.js and initialize the app there like so: `const firebaseApp = initializeApp(firebaseConfig)`
+
+7. Change the name in the reference to the Firestore collection in components/chat.js file from currently "messages" to the name choosen for the collection.
+
+### Getting started
+
+● Install all the dependencies:
+`npm i`
+
+● Start the app by:
+`expo start` or `npm start`
+
+● Launch app on smartphone:
+scan <b>QR code</b> or type in <b>respective abbreviations</b> (displayed in terminal) in Expo GUI
 
 ● Launch app on emulator:
 Press <b>"Run on Android device/emulator"</b> or <b>"Run on iOS emulator"</b> or <b>"run in web browser"</b> in Expo GUI
