@@ -100,3 +100,24 @@ Create Google Firebase/Firestore account for data storage.
 
 - Launch app on emulator:
   Press "Run on Android device/emulator" or "Run on iOS emulator" or "run in web browser" in Expo GUI
+
+## Learnings
+
+## ...from React Native
+
+Especially towards the end of the project I experienced dificculties with CustomActions as it did not pop up.
+After a while I realized that I needed to downgrade the newest version to "react-native-gifted-chat":
+"^0.16.3" in order to accept methods like that.
+
+## ...from Firebase Cloud
+
+Despite being
+
+## ...from Expo & Android Studio
+
+I saw the app crashing several times when leaving the chat, which is said to happen frequnetly at other developers, too. It took me a while to fix it, however.
+On the other hand, Android Studio (desktop & mobile) took me some time to grasp the functionaliy and logic behind it. But after all, it is worth working with as a tool to develop and test native apps based on React Native.
+
+## ...from the project
+
+Considering the scope of the development environment, I had to fix problems from potentially three sources. Given the fact that I firstly used those instruments did not make it easier. Nonetheless, I found it enriching insofar as I made the experioence of how to use three powerful tools (Firebase, Expo & Android Studio, React Native) of modern web development for future projects .
