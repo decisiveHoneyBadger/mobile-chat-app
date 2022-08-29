@@ -10,9 +10,11 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NetInfo from '@react-native-community/netinfo';
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
+import MapView from 'react-native-maps';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
+import CustomActions from './CustomActions';
 let styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -240,12 +242,35 @@ export default class Chat extends React.Component {
     );
   }
 
+  renderCustomActions(props) {
+    return <CustomActions {...props} />;
+  }
+
+  renderCustomView(props) {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{ width: 100, height: 100 }}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  }
   render() {
     return (
       <View style={[styles.container, { backgroundColor: this.props.color }]}>
         <GiftedChat
+          renderCustomView={this.renderCustomView}
           renderBubble={this.renderBubble.bind(this)}
           messages={this.state.messages}
+          renderActions={this.renderCustomActions.bind(this)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           onSend={(messages) => this.onSend(messages)}
           user={{
